@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    background: linear-gradient(to bottom right ,#f87171,#ec4899,#f9a8d4);
+    font-family: 'Inter',serif;
+     height: 100vh;
+}
+.appContainer{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding-top: 50px;
+}
+.taskForm{
+    display: flex;
+}
+.inputTask{
+    border-style:ridge;
+    padding: 10px;
+    border-radius: 10px 0px 0px 10px;
+}
+.inputBtn{
+    border-radius: 0px 10px 10px 0px;
+    padding: 10px;
+}
+.task{
+        align-items: center;
+}
+.taskContainer{
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
