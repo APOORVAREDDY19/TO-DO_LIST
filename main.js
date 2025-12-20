@@ -51,6 +51,48 @@ function createAndPushPtag(task) {
 
     const textValue=document.createElement("p");
     textValue.textContent=task.taskValue;
+    textValue.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+
+        const updatedText = textValue.textContent.trim();
+
+        if (updatedText === "") {
+            alert("Task cannot be empty");
+            textValue.textContent = task.taskValue;
+        } else {
+            for (let i = 0; i < TODOS.length; i++) {
+                if (TODOS[i].taskId === task.taskId) {
+                    TODOS[i].taskValue = updatedText;
+                }
+            }
+            saveTodosInLocalStorage(TODOS);
+        }
+
+        textValue.contentEditable = false;
+    }
+});
+textValue.addEventListener("blur", function () {
+    const updatedText = textValue.textContent.trim();
+
+    if (updatedText === "") {
+        textValue.textContent = task.taskValue;
+    } else {
+        for (let i = 0; i < TODOS.length; i++) {
+            if (TODOS[i].taskId === task.taskId) {
+                TODOS[i].taskValue = updatedText;
+            }
+        }
+        saveTodosInLocalStorage(TODOS);
+    }
+
+    textValue.contentEditable = false;
+});
+
+
+
+
+
     const timeStamp=document.createElement("p");
     timeStamp.textContent=task.TimeStamp
 
@@ -61,9 +103,18 @@ function createAndPushPtag(task) {
     actionContainer.setAttribute("class","action"); //this div is used for edit and delete button 
 
     const editTask=document.createElement("button");
-    editTask.textContent="Edit"
+    editTask.textContent="Edit"//edit
+    editTask.addEventListener("click",function(){
+        textValue.contentEditable=true;
+        textValue.focus();
+    });
+
+
+
+
     const deleteTask=document.createElement("button");
-    deleteTask.textContent="Delete"
+    deleteTask.textContent="Delete"//delete
+    
     deleteTask.addEventListener("click",function(){
         handleTaskDelete(task.taskId)
 
