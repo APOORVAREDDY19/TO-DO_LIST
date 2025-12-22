@@ -46,3 +46,7 @@ body{
     border-style: solid;
     padding: 5px;
 }
+.done{
+    text-decoration: line-through;
+    opacity: 1.0;
+}

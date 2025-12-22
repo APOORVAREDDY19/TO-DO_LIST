@@ -28,7 +28,6 @@ function renderTodos(todos) {
         createAndPushPtag(todos[index]);
     }
 }
-
 // tasksContainer.addEventListener("edit",function(){
 //     const EditTask = taskInput.value;
 
@@ -44,6 +43,20 @@ function createAndPushPtag(task) {
 
     const checkBox=document.createElement("input");
     checkBox.checked=task.isTaskDone;
+    // here we are adding an event to the check box and if check box is ticked it will have line through css
+    checkBox.addEventListener("change",function(){
+        task.isTaskDone=checkBox.checked;
+        if (checkBox.checked){
+            textValue.classList.add("done");
+        }
+        else{
+            textValue.classList.remove("done");
+        }
+        saveTodosInLocalStorage(TODOS);// this for local storage
+    }
+    );
+        
+    
     checkBox.setAttribute("type","checkbox");// for checkbox is task done
 
     const contentContainer=document.createElement("div");
@@ -51,6 +64,9 @@ function createAndPushPtag(task) {
 
     const textValue=document.createElement("p");
     textValue.textContent=task.taskValue;
+    if (task.isTaskDone){
+        textValue.classList.add("done");
+    }
     textValue.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
@@ -140,7 +156,14 @@ function saveTodosInLocalStorage(todos) {
     return;
 }
 
+
+
+
  function handleTaskDelete(deleteId){
+    const isConfirmed=window.confirm("Are you ready for deleting?");
+if (!isConfirmed){
+    return;
+}
     console.log(deleteId);
     TODOS=TODOS.filter((task)=>task.taskId!=deleteId)
     localStorage.setItem("todo",JSON.stringify(TODOS))
