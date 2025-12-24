@@ -191,4 +191,14 @@ taskForm.addEventListener("submit", function (event) {
     taskInput.value = "";
     
 });
+
+function updateTaskCounts(){
+    const total=TODOS.length;
+    const completed=TODOS.filter(task => task.isTaskDone).length;
+
+
+    document.getElementById("totalCount").textContent=`Total Tasks: ${total}`;
+    document.getElementById("completedCount").textContent=`Completed Tasks: ${completed}`;
+}
  
+updateTaskCounts();
